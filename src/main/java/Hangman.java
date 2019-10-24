@@ -29,6 +29,23 @@ class Hangman {
         }
     }
 
+    List<String> convertWordToStringList() {
+        List<Character> letters = new ArrayList<>();
+        for (Character letter : word.toCharArray()) {
+            letters.add(letter);
+        }
+        fullWord = letters.stream().map(Object::toString).collect(Collectors.toList());
+        return fullWord;
+    }
+
+    List<String> createBlankWord() {
+        String underscore = "_";
+        for (int i = 0; i < fullWord.size(); i++) {
+            blankWord.add(i, underscore);
+        }
+        return blankWord;
+    }
+
     boolean isWin() {
         return blankWord.containsAll(fullWord) && fullWord.containsAll(blankWord);
     }
@@ -48,41 +65,24 @@ class Hangman {
         return blankWord;
     }
 
+    boolean isLetterInWord(String playerLetter) {
+        return fullWord.stream().anyMatch(letter -> letter.equals(playerLetter));
+    }
+
     void addPenaltyPoint() {
         System.out.println("MISS!");
         ++penaltyPoints;
     }
 
-    boolean isLetterInWord(String playerLetter) {
-        return fullWord.stream().anyMatch(letter -> letter.equals(playerLetter));
-    }
-
-    List<String> createBlankWord() {
-        String underscore = "_";
-        for (int i = 0; i < fullWord.size(); i++) {
-            blankWord.add(i, underscore);
-        }
-        return blankWord;
-    }
-
-    List<String> convertWordToStringList() {
-        List<Character> letters = new ArrayList<>();
-        for (Character letter : word.toCharArray()) {
-            letters.add(letter);
-        }
-        fullWord = letters.stream().map(Object::toString).collect(Collectors.toList());
-        return fullWord;
-    }
-
-     void setWord(String word) {
+    void setWord(String word) {
         this.word = word;
     }
 
-     String getWord() {
+    String getWord() {
         return word;
     }
 
-     int getPenaltyPoints() {
+    int getPenaltyPoints() {
         return penaltyPoints;
     }
 }
