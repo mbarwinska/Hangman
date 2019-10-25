@@ -1,9 +1,42 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 class Player {
-    private String playerLetter;
+    private static String playerLetter;
+    private String wordForOpponent;
+    private String gameMode;
 
-    String insertLetter() {
+    Player () {
+        chooseGameMode();
+    }
+
+    void chooseGameMode() {
+        System.out.println("Do you wish to play against computer or other player?");
+        System.out.println("1 - computer, 2 - other player");
+        Scanner in = new Scanner(System.in);
+        gameMode = in.nextLine();
+    }
+
+     void switchGameMode() {
+       switch (gameMode) {
+           case "1":
+               Hangman hangmanComputer = new Hangman();
+               hangmanComputer.playGameAgainstComputer();
+               break;
+           case "2":
+               typeWordForOpponent();
+               Hangman hangmanPlayer = new Hangman(wordForOpponent);
+               hangmanPlayer.playGameAgainstPlayer();
+               break;
+       }
+    }
+    void typeWordForOpponent() {
+       System.out.println("Type word for your opponent!");
+        Scanner scanner = new Scanner(System.in);
+        wordForOpponent = scanner.nextLine();
+    }
+
+   static String insertLetter() {
         Scanner scanner = new Scanner(System.in);
         boolean keepInserting = true;
         while (keepInserting) {

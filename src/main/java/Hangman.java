@@ -9,14 +9,21 @@ class Hangman {
     private List<String> fullWord = new ArrayList<>();
     private List<String> blankWord = new ArrayList<>();
 
-    void playGame() {
+    Hangman () {
+        ComputerWordReader computerWordReader = new ComputerWordReader();
+        this.word = computerWordReader.getRandomWord();
+    }
+    Hangman (String word) {
+        this.word = word;
+    }
+
+    void playGameAgainstComputer() {
         System.out.println("Welcome to Hangman game!");
         convertWordToStringList();
         System.out.println(createBlankWord());
         while (!isWin() && penaltyPoints != 12) {
             System.out.println("Insert your letter!");
-            Player player = new Player();
-            String chosenLetter = player.insertLetter();
+            String chosenLetter = Player.insertLetter();
             insertPlayerLetterInBlankWord(chosenLetter);
             System.out.println("Your word: " + blankWord);
             System.out.println("You have " + (12 - penaltyPoints) + " tries left!");
@@ -26,6 +33,29 @@ class Hangman {
         } else {
             System.out.println("Lost");
             Board.printHangman();
+            System.out.println("Word: " + word);
+        }
+
+
+    }
+
+    void playGameAgainstPlayer() {
+        System.out.println("Welcome to Hangman game!");
+        convertWordToStringList();
+        System.out.println(createBlankWord());
+        while (!isWin() && penaltyPoints != 12) {
+            System.out.println("Insert your letter!");
+            String chosenLetter = Player.insertLetter();
+            insertPlayerLetterInBlankWord(chosenLetter);
+            System.out.println("Your word: " + blankWord);
+            System.out.println("You have " + (12 - penaltyPoints) + " tries left!");
+        }
+        if (isWin()) {
+            System.out.println("WIN!");
+        } else {
+            System.out.println("Lost");
+            Board.printHangman();
+            System.out.println("Word: " + word);
         }
     }
 
