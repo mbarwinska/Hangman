@@ -12,6 +12,7 @@ autostrada
 atrament
 aerozol
 alpaka
+biceps
 bombowiec
 bombonierka
 brukselka
@@ -90,9 +91,11 @@ okrasa
 pracownik
 pisownia
 rower
+salsa
 statosfera
 studiowanie
 student
+sztanga
 towar
 trakt
 ukrop
@@ -101,4 +104,5 @@ wulgaryzm
 zombie
 zebra
 zegarmistrz
+zorba
 

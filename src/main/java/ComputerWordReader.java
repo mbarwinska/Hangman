@@ -11,7 +11,7 @@ class ComputerWordReader {
     private List<String> words;
     private String randomWord;
 
-    public ComputerWordReader() {
+     ComputerWordReader() {
         readWords();
         drawRandomWord();
     }
@@ -30,7 +30,7 @@ class ComputerWordReader {
         randomWord = words.get(random.nextInt(words.size()));
     }
 
-    public String getRandomWord() {
+     String getRandomWord() {
         return randomWord;
     }
 }

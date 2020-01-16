@@ -82,7 +82,7 @@ class Hangman {
 
     List<String> insertPlayerLetterInBlankWord(String playerLetter) {
         if (isLetterInWord(playerLetter)) {
-            System.out.println("Good shot!");
+            System.out.println("GOOD SHOT!");
             for (int i = 0; i < fullWord.size(); i++) {
                 if (fullWord.get(i).equalsIgnoreCase(playerLetter)) {
                     blankWord.set(i, playerLetter);
@@ -112,7 +112,4 @@ class Hangman {
         return word;
     }
 
-    int getPenaltyPoints() {
-        return penaltyPoints;
-    }
 }

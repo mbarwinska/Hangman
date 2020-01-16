@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 class Player {
@@ -6,37 +5,38 @@ class Player {
     private String wordForOpponent;
     private String gameMode;
 
-    Player () {
+    Player() {
         chooseGameMode();
     }
 
-    void chooseGameMode() {
+    private void chooseGameMode() {
         System.out.println("Do you wish to play against computer or other player?");
         System.out.println("1 - computer, 2 - other player");
         Scanner in = new Scanner(System.in);
         gameMode = in.nextLine();
     }
 
-     void switchGameMode() {
-       switch (gameMode) {
-           case "1":
-               Hangman hangmanComputer = new Hangman();
-               hangmanComputer.playGameAgainstComputer();
-               break;
-           case "2":
-               typeWordForOpponent();
-               Hangman hangmanPlayer = new Hangman(wordForOpponent);
-               hangmanPlayer.playGameAgainstPlayer();
-               break;
-       }
+    void switchGameMode() {
+        switch (gameMode) {
+            case "1":
+                Hangman hangmanComputer = new Hangman();
+                hangmanComputer.playGameAgainstComputer();
+                break;
+            case "2":
+                typeWordForOpponent();
+                Hangman hangmanPlayer = new Hangman(wordForOpponent);
+                hangmanPlayer.playGameAgainstPlayer();
+                break;
+        }
     }
-    void typeWordForOpponent() {
-       System.out.println("Type word for your opponent!");
+
+    private void typeWordForOpponent() {
+        System.out.println("Type word for your opponent!");
         Scanner scanner = new Scanner(System.in);
         wordForOpponent = scanner.nextLine();
     }
 
-   static String insertLetter() {
+    static String insertLetter() {
         Scanner scanner = new Scanner(System.in);
         boolean keepInserting = true;
         while (keepInserting) {
@@ -49,12 +49,5 @@ class Player {
         return playerLetter;
     }
 
-    String getPlayerLetter() {
-        return playerLetter;
-    }
-
-    void setPlayerLetter(String playerLetter) {
-        this.playerLetter = playerLetter;
-    }
 
 }

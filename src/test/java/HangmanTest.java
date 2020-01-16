@@ -1,16 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
-
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
 public class HangmanTest {
     private Hangman hangman;
 
@@ -33,7 +26,7 @@ public class HangmanTest {
     public void shouldConvertSetWordToListOfStrings() {
         //given
         hangman.setWord("bunny");
-        List<String> expectedWordLetterByLetter = Arrays.asList("b","u","n","n","y");
+        List<String> expectedWordLetterByLetter = Arrays.asList("b", "u", "n", "n", "y");
 
         //when
         List<String> wordLetterByLetter = hangman.convertWordToStringList();
@@ -61,7 +54,7 @@ public class HangmanTest {
         //given
         hangman.setWord("bunny");
         hangman.convertWordToStringList();
-        List<String> expectedBlankWord = Arrays.asList("_","_","_","_","_");
+        List<String> expectedBlankWord = Arrays.asList("_", "_", "_", "_", "_");
 
         //when
         List<String> blankWord = hangman.createBlankWord();
@@ -70,91 +63,6 @@ public class HangmanTest {
         assertThat(blankWord).isEqualTo(expectedBlankWord);
     }
 
-    @Mock
-    private Player player;
-
-    @Test
-    public void shouldReturnFalseWhenPlayersLetterIsNotPresentInWord() { //nie działa z mockiem -.-
-        //given
-        player = new Player();
-//        Mockito.when(player.insertLetter()).thenReturn("a");
-        player.setPlayerLetter("a");
-        hangman.setWord("bunny");
-
-        //when
-        boolean isLetterInWord = hangman.isLetterInWord(player.getPlayerLetter());
-
-        //then
-        assertThat(isLetterInWord).isFalse();
-
-    }
-
-    @Test
-    public void shouldReturnTrueWhenPlayersLetterIsPresentInWord() {
-        //given
-        player = new Player();
-        player.setPlayerLetter("u");
-        hangman.setWord("bunny");
-        hangman.convertWordToStringList();
-
-        //when
-           boolean isLetterInWord = hangman.isLetterInWord(player.getPlayerLetter());
-
-        //then
-        assertThat(isLetterInWord).isTrue();
-
-    }
-
-    @Test
-    public void shouldInsertPlayerLetterToWordInProperPlaceWhenThereIsOneMatch() {
-        //given
-        player = new Player();
-        player.setPlayerLetter("u");
-        hangman.setWord("bunny");
-        hangman.convertWordToStringList();
-        hangman.createBlankWord();
-        List<String> expectedFilledWord = Arrays.asList("_", "u", "_", "_", "_");
-
-        //when
-        List<String> filledWord = hangman.insertPlayerLetterInBlankWord(player.getPlayerLetter());
-
-        //then
-        assertThat(filledWord).isEqualTo(expectedFilledWord);
-
-    }
-
-    @Test
-    public void shouldInsertPlayerLetterToWordInProperPlaceWhenThereIsMoreThanOneMatch() {
-        //given
-        player = new Player();
-        player.setPlayerLetter("n");
-        hangman.setWord("bunny");
-        hangman.convertWordToStringList();
-        hangman.createBlankWord();
-        List<String> expectedFilledWord = Arrays.asList("_", "_", "n", "n", "_");
-
-        //when
-        List<String> filledWord = hangman.insertPlayerLetterInBlankWord(player.getPlayerLetter());
-
-        //then
-        assertThat(filledWord).isEqualTo(expectedFilledWord);
-
-    }
-
-    @Test
-    public void shouldIncrementNumberOfPenaltyPointsBy1WhenThereIsNoMatch() {
-        //given
-        player = new Player();
-        player.setPlayerLetter("a");
-        hangman.setWord("bunny");
-        int expectedPenaltyPoints = 1;
-
-        //when
-        hangman.insertPlayerLetterInBlankWord(player.getPlayerLetter());
-
-        //then
-        assertThat(hangman.getPenaltyPoints()).isEqualTo(expectedPenaltyPoints);
-    }
 
     @Test
     public void shouldReturnTrueWhenThereIsWin() {
